@@ -38,7 +38,7 @@ public class ServiceBroadcastReceiver extends BroadcastReceiver {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void scheduleJob(Context context) {
+    public static void scheduleJob(Context context) {
         if(jobScheduler == null){
             jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         }

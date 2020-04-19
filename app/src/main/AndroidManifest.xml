@@ -3,6 +3,7 @@
     package="com.example.neverendingservice">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_LAUNCH_BROADCASTS" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +11,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <service
+            android:name=".ServiceRestart.JobSceduleService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"></service>
         <service
             android:name=".MyService"
             android:enabled="true"
@@ -19,9 +25,11 @@
         <receiver
             android:name=".ServiceRestart.ServiceBroadcastReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
             </intent-filter>
         </receiver>
 
