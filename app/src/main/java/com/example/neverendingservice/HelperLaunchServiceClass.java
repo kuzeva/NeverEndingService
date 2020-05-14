@@ -14,7 +14,7 @@ public class HelperLaunchServiceClass {
     public HelperLaunchServiceClass() {
     }
 
-    //
+
     public static void launchService(Context context) {
         if (context == null) {
             return;

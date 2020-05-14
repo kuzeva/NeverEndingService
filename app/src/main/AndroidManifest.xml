@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RECEIVE_LAUNCH_BROADCASTS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -13,14 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <service
-            android:name=".ServiceRestart.JobSceduleService"
+            android:name=".ServiceRestart.JobScheduleService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE"></service>
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"/>
 
         <receiver
             android:name=".ServiceRestart.ServiceBroadcastReceiver"
@@ -30,6 +34,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="com.example.neverendingservice.activity.recognition.active_service.RestartActiveService"/>
+
             </intent-filter>
         </receiver>
 

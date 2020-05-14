@@ -14,7 +14,6 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.example.neverendingservice.HelperLaunchServiceClass;
-import com.example.neverendingservice.MyService;
 
 public class ServiceBroadcastReceiver extends BroadcastReceiver {
 
@@ -42,7 +41,7 @@ public class ServiceBroadcastReceiver extends BroadcastReceiver {
         if(jobScheduler == null){
             jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         }
-        ComponentName componentName = new ComponentName(context, JobSceduleService.class);
+        ComponentName componentName = new ComponentName(context, JobScheduleService.class);
         JobInfo jobInfo = new JobInfo.Builder(JOB_ID,componentName)
                 .setOverrideDeadline(0)
                 .setPersisted(true)

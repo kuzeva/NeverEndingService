@@ -13,7 +13,8 @@ import androidx.annotation.RequiresApi;
 import com.example.neverendingservice.HelperLaunchServiceClass;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class JobSceduleService extends JobService {
+public class JobScheduleService extends JobService {
+
     private static String TAG = "JOB_SERVICE";
     public static ServiceBroadcastReceiver serviceBR;
     private static JobService jobService;
@@ -23,13 +24,14 @@ public class JobSceduleService extends JobService {
     public boolean onStartJob(JobParameters params) {
 
         HelperLaunchServiceClass.launchService(this);
-        registerReceieverRestarter();
+        registerReceiverRestarter();
         jobService = this;
-        JobSceduleService.jobParameters = jobParameters;
+        JobScheduleService.jobParameters = params;
         return false;
     }
 
-    private void registerReceieverRestarter() {
+    private void registerReceiverRestarter() {
+
         if (serviceBR == null)
             serviceBR = new ServiceBroadcastReceiver();
         else try{
@@ -67,6 +69,7 @@ public class JobSceduleService extends JobService {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 unregisterReceiver(serviceBR);
             }
         }, 1000);
